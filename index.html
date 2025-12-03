@@ -1,722 +1,369 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Protect Animals — Together for a Kinder World</title>
+  <meta name="description" content="Join our mission to protect animals. Volunteer, donate, adopt, and advocate for animal rights and conservation." />
+  <meta name="author" content="Your Organization Name" />
+  <style>
+    /* Basic Reset */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height:100%; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color:#111827; background:linear-gradient(180deg,#f8fafc 0%, #ffffff 100%); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+    /* Layout */
+    .container { max-width:1100px; margin:0 auto; padding:28px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:12px 0; }
+    .logo { display:flex; gap:12px; align-items:center; text-decoration:none; color:inherit; }
+    .logo svg { width:44px; height:44px; flex-shrink:0; }
+    nav { display:flex; gap:12px; align-items:center; }
+    nav a { text-decoration:none; color:#374151; padding:8px 12px; border-radius:8px; font-weight:600; }
+    nav a:focus, nav a:hover { background:#eef2ff; color:#1e3a8a; outline: none; }
+
+    /* Hero */
+    .hero { display:grid; grid-template-columns:1fr; gap:20px; align-items:center; padding:40px 0; }
+    .hero-inner { background:#ffffff; border-radius:14px; padding:28px; box-shadow:0 6px 24px rgba(15,23,42,0.06); display:flex; gap:24px; flex-direction:column; }
+    .hero h1 { font-size:clamp(1.6rem, 3.2vw, 2.4rem); line-height:1.05; color:#0f172a; }
+    .lead { color:#475569; font-size:1rem; margin-top:8px; }
+    .cta-row { display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; gap:10px; padding:10px 16px; border-radius:10px; font-weight:700; text-decoration:none; cursor:pointer; border:0; }
+    .btn-primary { background:linear-gradient(90deg,#1e90ff,#4f46e5); color:white; box-shadow:0 6px 18px rgba(79,70,229,0.18); }
+    .btn-ghost { background:transparent; color:#374151; border:1px solid #e6eef8; }
+
+    /* Cards */
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:26px; }
+    .card { background:linear-gradient(180deg, #ffffff, #fbfdff); border-radius:12px; padding:18px; box-shadow:0 4px 18px rgba(15,23,42,0.04); }
+    .card h3 { font-size:1.05rem; margin-bottom:8px; color:#0b1220; }
+    .card p { color:#4b5563; font-size:0.95rem; line-height:1.5; }
+
+    /* Sections */
+    section { padding:28px 0; }
+    h2.section-title { font-size:1.15rem; color:#0b1220; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+    .muted { color:#6b7280; font-size:0.95rem; }
+
+    /* FAQ / Accordion */
+    .faq { max-width:900px; margin-top:12px; }
+    .accordion-item { border-radius:10px; overflow:hidden; margin-bottom:10px; border:1px solid #eef2f6; }
+    .accordion-button { display:flex; justify-content:space-between; align-items:center; padding:14px 16px; cursor:pointer; background:#fff; }
+    .accordion-button:hover { background:#fbfdff; }
+    .accordion-content { padding:12px 16px; color:#475569; display:none; background:#fff; border-top:1px solid #f1f5f9; }
+
+    /* Footer */
+    footer { margin-top:28px; padding:18px 0; border-top:1px dashed #eef2f6; display:flex; justify-content:space-between; gap:12px; align-items:center; flex-wrap:wrap; }
+    .small { color:#6b7280; font-size:0.9rem; }
+
+    /* Donate Modal */
+    .modal-backdrop { position:fixed; inset:0; background:rgba(2,6,23,0.55); display:none; align-items:center; justify-content:center; z-index:60; padding:20px; }
+    .modal { background:#fff; border-radius:12px; padding:20px; max-width:480px; width:100%; box-shadow:0 18px 40px rgba(2,6,23,0.35); }
+    .modal h3 { margin-bottom:10px; }
+    .modal .donate-grid { display:grid; gap:10px; grid-template-columns:repeat(3,1fr); margin:12px 0; }
+    .amount { padding:10px; border-radius:8px; text-align:center; cursor:pointer; border:1px solid #eef2f6; font-weight:700; }
+    .amount.selected { background:linear-gradient(90deg,#60a5fa,#8b5cf6); color:white; border:0; }
+
+    /* Responsive */
+    @media(min-width:880px){
+      .hero { grid-template-columns: 1fr 420px; }
+      .hero-inner { flex-direction:column; }
+      header { padding:0; }
+    }
+    /* Accessibility focus outline */
+    :focus { outline: 3px solid rgba(99,102,241,0.18); outline-offset: 3px; }
+
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <div class="container" id="top">
+    <header role="banner">
+      <a href="#top" class="logo" aria-label="Protect Animals Home">
+        <!-- Simple animal paw logo (accessible) -->
+        <svg viewBox="0 0 64 64" role="img" aria-hidden="true" focusable="false">
+          <title>Paw</title>
+          <g fill="#2563eb">
+            <path d="M45 19c3.5-4 6-10 1-13-4-2.7-7.8 3-8.8 6-1 3-3.6 6-2 10 1.6 4 6 5 9.8-3z" opacity=".95"></path>
+            <path d="M20 16c-2.2-4-6-7-9.5-4-3 2.5-.7 7 1 10 2 3.4 6 6 8.5 1z" opacity=".95"></path>
+            <path d="M33 6c-4 0-8 2.8-8 6.5S29 20 33 20s8-5 8-9.5S37 6 33 6z"></path>
+            <path d="M50 36c-1 8-8 18.5-24 22-16-3.5-23-14-24-22C2 26 22 16 32 30c10-14 30-4 18 6z" opacity=".95"></path>
+          </g>
+        </svg>
+        <div>
+          <div style="font-weight:800; font-size:1rem; color:#0b1220;">ProtectAnimals</div>
+          <div style="font-size:0.8rem; color:#6b7280;">Kindness. Rescue. Action.</div>
         </div>
+      </a>
+
+      <nav role="navigation" aria-label="Main Navigation">
+        <a href="#about">About</a>
+        <a href="#get-involved">Get Involved</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact" class="btn btn-ghost">Contact</a>
+      </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+    <!-- HERO -->
+    <main role="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner" role="region" aria-labelledby="hero-title">
+          <div>
+            <h1 id="hero-title">Protect Animals. Protect Our Future.</h1>
+            <p class="lead">We are a community-driven organization dedicated to preventing cruelty, conserving wildlife, and promoting humane treatment for all animals — domestic and wild.</p>
+            <div class="cta-row" role="group" aria-label="Primary actions">
+              <button class="btn btn-primary" id="donateBtn" aria-controls="donate-modal">Donate Now</button>
+              <a href="#get-involved" class="btn btn-ghost">How to Help</a>
+            </div>
+          </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
+          <div aria-hidden="false" style="display:flex; flex-direction:column; gap:12px;">
+            <div class="card" role="article" aria-label="Our mission">
+              <h3>Our Mission</h3>
+              <p>Rescue, rehabilitate, and rehome animals in need; protect habitats; and inspire compassionate action through education and advocacy.</p>
             </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
+            <div class="card" role="article" aria-label="Impact snapshot">
+              <h3>Impact Snapshot</h3>
+              <p><strong>2,800+</strong> rescues last year • <strong>120</strong> community workshops • <strong>50+</strong> partner shelters</p>
             </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+        <!-- Right column: quick actions -->
+        <aside aria-label="Quick actions" style="align-self:start;">
+          <div class="card">
+            <h3>Take Action</h3>
+            <div class="grid" style="margin-top:12px;">
+              <div>
+                <strong>Volunteer</strong>
+                <p class="muted">Help at shelters, foster, or assist in outreach.</p>
+              </div>
+              <div>
+                <strong>Adopt</strong>
+                <p class="muted">Give a forever home to a rescued animal.</p>
+              </div>
+              <div>
+                <strong>Advocate</strong>
+                <p class="muted">Raise awareness and support humane policies.</p>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <!-- About / Why -->
+      <section id="about" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">Why Animal Protection Matters</h2>
+        <p class="muted">Animals are integral to healthy ecosystems and human well-being. Protecting them preserves biodiversity, food security, and the moral fabric of our societies.</p>
+
+        <div class="grid" style="margin-top:18px;">
+          <div class="card">
+            <h3>Conservation & Ecosystems</h3>
+            <p>Healthy wildlife populations balance ecosystems. Protecting species prevents cascading effects that threaten habitats and communities.</p>
+          </div>
+          <div class="card">
+            <h3>Companion Animals</h3>
+            <p>Responsible ownership, spaying/neutering, and anti-cruelty measures reduce suffering and stray populations.</p>
+          </div>
+          <div class="card">
+            <h3>Education & Policy</h3>
+            <p>Public awareness and strong laws help prevent abuse and promote sustainable practices that benefit animals and people alike.</p>
+          </div>
         </div>
-    </section>
+      </section>
+
+      <!-- Get Involved -->
+      <section id="get-involved" aria-labelledby="involved-title">
+        <h2 class="section-title" id="involved-title">How You Can Help</h2>
+        <p class="muted">Everyone can contribute — choose what fits your time and passion.</p>
+
+        <div class="grid" style="margin-top:14px;">
+          <div class="card" aria-labelledby="volunteer">
+            <h3 id="volunteer">Volunteer</h3>
+            <p>Assist with shelter care, adoption events, or wildlife rescue operations. Volunteer opportunities range from a few hours a month to full-time support.</p>
+          </div>
+          <div class="card" aria-labelledby="adopt">
+            <h3 id="adopt">Adopt & Foster</h3>
+            <p>Open your home to an animal in need. Fostering relieves shelters and gives animals a better chance to find permanent homes.</p>
+          </div>
+          <div class="card" aria-labelledby="donate">
+            <h3 id="donate">Donate</h3>
+            <p>Monetary gifts support veterinary care, food, and rescue missions. Supplies like blankets, towels, and pet food are also invaluable.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" aria-labelledby="faq-title">
+        <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+        <p class="muted">Quick answers to common questions.</p>
+
+        <div class="faq" role="list">
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-button" aria-expanded="false" aria-controls="acc1" id="acc1-btn">
+              <span>How do I report animal abuse?</span>
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div id="acc1" class="accordion-content" role="region" aria-labelledby="acc1-btn">
+              <p>Contact your local animal control or police non-emergency line. If possible, document the abuse (photos, time, location) and report to a trusted animal welfare organization.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-button" aria-expanded="false" aria-controls="acc2" id="acc2-btn">
+              <span>What is the difference between adopt and buy?</span>
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div id="acc2" class="accordion-content" role="region" aria-labelledby="acc2-btn">
+              <p>Adopting supports rescues and saves lives; buying from breeders may not address overpopulation. If purchasing, ensure breeders follow ethical standards.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item" role="listitem">
+            <button class="accordion-button" aria-expanded="false" aria-controls="acc3" id="acc3-btn">
+              <span>Can I volunteer remotely?</span>
+              <span aria-hidden="true">▼</span>
+            </button>
+            <div id="acc3" class="accordion-content" role="region" aria-labelledby="acc3-btn">
+              <p>Yes — help with fundraising, social media advocacy, remote education, or administrative tasks. Check local groups for remote volunteer listings.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" aria-labelledby="contact-title" style="padding-bottom:40px;">
+        <h2 class="section-title" id="contact-title">Contact & Next Steps</h2>
+        <p class="muted">Want to get involved or learn more? Drop us a message.</p>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:18px; margin-top:12px;">
+          <form class="card" aria-label="Contact form" onsubmit="event.preventDefault(); alert('Thank you — we will reach out to you!');">
+            <label for="name" style="display:block; font-weight:700; margin-bottom:8px;">Full name</label>
+            <input id="name" name="name" required type="text" placeholder="Jane Doe" style="width:100%; padding:10px; border-radius:8px; border:1px solid #e6eef8; margin-bottom:12px;" />
+
+            <label for="email" style="display:block; font-weight:700; margin-bottom:8px;">Email</label>
+            <input id="email" name="email" required type="email" placeholder="you@example.com" style="width:100%; padding:10px; border-radius:8px; border:1px solid #e6eef8; margin-bottom:12px;" />
+
+            <label for="message" style="display:block; font-weight:700; margin-bottom:8px;">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="I'm interested in volunteering..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #e6eef8; margin-bottom:12px;"></textarea>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+              <button type="submit" class="btn btn-primary">Send Message</button>
+              <a href="#get-involved" class="btn btn-ghost">View Opportunities</a>
+            </div>
+          </form>
+
+          <div class="card">
+            <h3>Visit Us</h3>
+            <p class="muted">If you prefer in-person contact, check local shelter hours and safety guidelines before visiting.</p>
+            <p style="margin-top:8px;"><strong>Email:</strong> info@protectanimals.example</p>
+            <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
+    <footer role="contentinfo">
+      <div class="small">© <span id="year"></span> ProtectAnimals · All rights reserved</div>
+      <div class="small">Made with ♥ for animals · <a href="#about" style="text-decoration:none;color:inherit;">Privacy</a></div>
     </footer>
+  </div>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <!-- Donate Modal -->
+  <div id="donate-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="donate-title">
+    <div class="modal" role="document">
+      <h3 id="donate-title">Support Rescue Efforts</h3>
+      <p class="muted">Your donation helps pay for veterinary care, medical supplies, and shelter operations.</p>
+      <div class="donate-grid" role="radiogroup" aria-label="Donation amounts">
+        <div class="amount" role="radio" tabindex="0" data-amount="10">$10</div>
+        <div class="amount" role="radio" tabindex="0" data-amount="25">$25</div>
+        <div class="amount" role="radio" tabindex="0" data-amount="50">$50</div>
+      </div>
+      <label for="custom-amt" style="display:block; margin-top:8px; font-weight:700;">Custom amount</label>
+      <input id="custom-amt" type="number" min="1" placeholder="Enter amount (USD)" style="width:100%; padding:10px; border-radius:8px; border:1px solid #eef2f6; margin-top:8px;" />
+      <div style="display:flex; gap:8px; margin-top:12px;">
+        <button class="btn btn-primary" id="confirm-donate">Donate</button>
+        <button class="btn btn-ghost" id="close-donate">Cancel</button>
+      </div>
+    </div>
+  </div>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+  <script>
+    // Small JS for accessibility and interactions
+
+    // Set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Accordion
+    document.querySelectorAll('.accordion-button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        // close all
+        document.querySelectorAll('.accordion-button').forEach(b => b.setAttribute('aria-expanded','false'));
+        document.querySelectorAll('.accordion-content').forEach(c => c.style.display = 'none');
+        if (!expanded) {
+          btn.setAttribute('aria-expanded','true');
+          const id = btn.getAttribute('aria-controls');
+          document.getElementById(id).style.display = 'block';
         }
+      });
+      // keyboard support
+      btn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+      });
+    });
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    // Donate modal
+    const donateModal = document.getElementById('donate-modal');
+    const donateBtn = document.getElementById('donateBtn');
+    const closeDonate = document.getElementById('close-donate');
+    const confirmDonate = document.getElementById('confirm-donate');
+    let selectedAmount = null;
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    function openModal(){
+      donateModal.style.display = 'flex';
+      // focus trap start
+      const first = donateModal.querySelector('[role="radio"]');
+      if (first) first.focus();
+    }
+    function closeModal(){
+      donateModal.style.display = 'none';
+      donateBtn.focus();
+    }
+
+    donateBtn.addEventListener('click', openModal);
+    closeDonate.addEventListener('click', closeModal);
+
+    // click outside to close
+    donateModal.addEventListener('click', (e) => {
+      if (e.target === donateModal) closeModal();
+    });
+
+    // donation amounts selection
+    document.querySelectorAll('.amount').forEach(el => {
+      const select = () => {
+        document.querySelectorAll('.amount').forEach(a => a.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedAmount = el.dataset.amount;
+        document.getElementById('custom-amt').value = '';
+      };
+      el.addEventListener('click', select);
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); }});
+    });
+
+    confirmDonate.addEventListener('click', () => {
+      const custom = document.getElementById('custom-amt').value;
+      const amount = custom ? custom : selectedAmount;
+      if (!amount || Number(amount) <= 0) {
+        alert('Please select or enter a valid donation amount.');
+        return;
+      }
+      // In real site: send to payment gateway
+      alert('Thank you for your donation of $' + amount + ' — your support matters!');
+      closeModal();
+    });
+
+    // Close modal with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && donateModal.style.display === 'flex') closeModal();
+    });
+  </script>
 </body>
-
 </html>
